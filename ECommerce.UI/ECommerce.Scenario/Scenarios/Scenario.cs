@@ -2,6 +2,7 @@
 using ECommerce.Scenario.Operations;
 using System;
 using System.IO;
+using System.Linq;
 
 namespace ECommerce.Scenario.Scenarios
 {
@@ -30,8 +31,7 @@ namespace ECommerce.Scenario.Scenarios
                 scenarioCount++;
                 Console.WriteLine("Scneario" + scenarioCount);
 
-                StreamReader streamReader = new StreamReader(path);
-                var scenario = streamReader.ReadToEnd().Split('\n');
+                var scenario = File.ReadAllLines(path).ToArray();
                 foreach (var item in scenario)
                 {
                     if (string.IsNullOrWhiteSpace(item))

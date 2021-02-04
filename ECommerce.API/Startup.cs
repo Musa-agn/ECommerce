@@ -35,6 +35,19 @@ namespace ECommerce.API
             services.AddScoped<IIncreaseTimeService, IncreaseTimeService>();
             services.AddScoped<ICampaignAlgorithmService, CampaignAlgorithmService>();
             services.AddScoped<IScenarioService, ScenarioService>();
+
+            services.AddSwaggerGen(c =>
+           {
+               c.SwaggerDoc("CoreSwagger", new Microsoft.OpenApi.Models.OpenApiInfo
+               {
+                   Title = "Swagger on ASP.NET Core",
+                   Version = "1.0.0",
+                   Contact = new Microsoft.OpenApi.Models.OpenApiContact()
+                   {
+                       Name = "Musa Aðaçyetiþtiren",
+                   },
+               });
+           });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,8 +57,14 @@ namespace ECommerce.API
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseExceptionMiddleware();
+
+            app.UseSwagger()
+            .UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/CoreSwagger/swagger.json", "Swagger Test .Net Core");
+            });
+
             app.UseRouting();
 
             app.UseAuthorization();
